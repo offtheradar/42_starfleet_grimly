@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:55:04 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 10:30:02 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 10:32:46 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ typedef struct	s_maze_info
 	t_point *start_point;
 	char	**map;
 }				t_maze_info;
+
+t_qnode			*new_node(t_point *pt);
+
+t_queue			*create_queue(void);
+
+void			enqueue(t_queue *q, t_point *pt);
+
+t_qnode			*dequeue(t_queue *q);
 
 int				open_file(char *file_name);
 
