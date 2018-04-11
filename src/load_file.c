@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:56:35 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/10 19:32:09 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 10:30:55 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ t_maze_info		*load_file(int fd)
 		map_error();
 	return (maze);
 }
-#include <stdio.h>
+
 void		print_maze(t_maze_info *info)
 {
 	int i;
@@ -148,16 +148,4 @@ void		print_maze(t_maze_info *info)
 		ft_putstr("\n");
 		i++;
 	}
-	printf("r size is %d\n", info->row_size);
-}
-
-int main(int argc, char **argv)
-{
-	int fd;
-
-	if (argc != 2)
-		map_error();
-	fd = open_file(argv[1]);
-	print_maze(load_file(fd));
-	return (0);
 }
