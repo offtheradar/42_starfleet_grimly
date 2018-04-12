@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:05:55 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 10:28:24 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 12:06:26 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ void	enqueue(t_queue *q, t_point *pt)
 ** Function to remove, and return the first element in the queue (FIFO)
 */
 
-t_qnode		*dequeue(t_queue *q)
+void	dequeue(t_queue *q)
 {
 	t_qnode *tmp;
 
-	if (!q->front)
-		return (NULL);
+	if (!q->front || !q)
+		return ;
 	tmp = q->front;
 	q->front = q->front->next;
 	if (!q->front)
 		q->rear = NULL;
-	return (tmp);
+	free (tmp);
 }

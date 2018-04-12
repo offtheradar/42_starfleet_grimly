@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:56:35 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 10:36:00 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 17:17:31 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	load_input_descriptor(char *buff, t_maze_info **maze)
 	(*maze)->end = *(buff);
 }
 
+#include <stdio.h>
 int		verify_row(char *str, t_maze_info *info)
 {
 	int			i;
@@ -88,7 +89,8 @@ int		verify_row(char *str, t_maze_info *info)
 		{
 			num_entries += 1;
 			info->start_point->x = i;
-			info->start_point->y = rows - 1;
+			info->start_point->y = rows;
+			printf("x is %d and y is %d\n", i, rows);
 		}
 		if (str[i] == info->end)
 			num_exit += 1;

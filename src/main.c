@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:30:24 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 10:30:38 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 12:41:35 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int main(int argc, char **argv)
 {
 	int fd;
+	t_maze_info *maze;
 
 	if (argc != 2)
 		map_error();
 	fd = open_file(argv[1]);
-	print_maze(load_file(fd));
+	maze = load_file(fd);
+	solve_map(&maze);
 	return (0);
 }

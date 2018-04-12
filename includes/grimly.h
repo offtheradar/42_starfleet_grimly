@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:55:04 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 10:32:46 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 18:23:47 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_queue			*create_queue(void);
 
 void			enqueue(t_queue *q, t_point *pt);
 
-t_qnode			*dequeue(t_queue *q);
+void			dequeue(t_queue *q);
 
 int				open_file(char *file_name);
 
@@ -69,5 +69,17 @@ void			malloc_map(char ***str, int num_row, int num_col);
 t_maze_info		*load_file(int fd);
 
 void			print_maze(t_maze_info *info);
+
+int				is_valid_pt(int x, int y, t_maze_info *info);
+
+int				solution_found(t_maze_info *info, t_qnode *q);
+
+int				is_empty(int x, int y, t_maze_info *info);
+
+void			create_path(t_maze_info **info, int x, int y);
+
+void			backtrack_print(t_maze_info **info, int x, int y, int counter);
+
+void			solve_map(t_maze_info **info);
 
 #endif
