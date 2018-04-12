@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:31:03 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 20:45:27 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 10:49:07 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ void		malloc_map(char ***str, int num_row, int num_col)
 	}
 }
 
-void		init_point(t_point *p, int x, int y)
+t_point		*init_point(int x, int y)
 {
+	t_point *p;
+
 	p = (t_point *)ft_memalloc(sizeof(t_point));
 	p->x = x;
 	p->y = y;
+	return (p);
 }

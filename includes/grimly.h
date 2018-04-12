@@ -6,14 +6,13 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:55:04 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 20:03:13 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 11:01:49 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRIMLY_H
-#define GRIMLY_H
-
-#include "libft/libft.h"
+# define GRIMLY_H
+# include "libft/libft.h"
 
 typedef	struct	s_point
 {
@@ -50,6 +49,8 @@ t_qnode			*new_node(t_point *pt);
 
 t_queue			*create_queue(void);
 
+t_point			*init_point(int x, int y);
+
 void			enqueue(t_queue *q, t_point *pt);
 
 void			dequeue(t_queue *q);
@@ -78,7 +79,7 @@ int				solution_found(t_maze_info *info, t_qnode *q);
 
 int				is_empty(int x, int y, t_maze_info *info);
 
-int			create_path(t_maze_info **info, int x, int y);
+int				create_path(t_maze_info **info, int x, int y);
 
 void			backtrack_print(t_maze_info **info, int x, int y);
 

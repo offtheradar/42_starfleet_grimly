@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:54:09 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 20:44:56 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 11:02:50 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ void	visit_adj(t_maze_info **info, int x, int y, t_queue *q, char prv)
 {
 	t_point *p;
 
-	p = (t_point *)ft_memalloc(sizeof(t_point));
+	p = init_point(x, y);
 	(*info)->map[y][x] = prv;
-	p->x = x;
-	p->y = y;
 	enqueue(q, p);
 	free(p);
 }
@@ -57,7 +55,7 @@ void	solve_map(t_maze_info **info)
 	t_queue	q;
 	t_point	*p;
 
-	init_point(p, (*info)->start_point->x, (*info)->start_point->y);
+	p = init_point((*info)->start_point->x, (*info)->start_point->y);
 	q = *(create_queue());
 	enqueue(&q, p);
 	while (q.front)
