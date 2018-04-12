@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:55:04 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 18:23:47 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/11 20:03:13 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void			enqueue(t_queue *q, t_point *pt);
 
 void			dequeue(t_queue *q);
 
+void			free_queue(t_queue *q);
+
 int				open_file(char *file_name);
 
 void			init_maze_info(t_maze_info **new_maze);
@@ -76,9 +78,9 @@ int				solution_found(t_maze_info *info, t_qnode *q);
 
 int				is_empty(int x, int y, t_maze_info *info);
 
-void			create_path(t_maze_info **info, int x, int y);
+int			create_path(t_maze_info **info, int x, int y);
 
-void			backtrack_print(t_maze_info **info, int x, int y, int counter);
+void			backtrack_print(t_maze_info **info, int x, int y);
 
 void			solve_map(t_maze_info **info);
 
