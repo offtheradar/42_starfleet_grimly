@@ -6,7 +6,7 @@
 #    By: ysibous <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/12 10:31:31 by ysibous           #+#    #+#              #
-#    Updated: 2018/04/13 13:39:57 by ysibous          ###   ########.fr        #
+#    Updated: 2018/04/13 14:08:26 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ CFLAGS = -Wall -Wextra -Werror -o
 FILES = main.c
 FILES += init_struct.c
 FILES += load_file.c
-FILES += map_error.c
 FILES += print_map.c
 FILES +=  queue.c
 FILES += solve_map.c

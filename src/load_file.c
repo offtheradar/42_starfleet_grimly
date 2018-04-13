@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:56:35 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/13 13:38:33 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:06:57 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int			open_file(char *file_name)
 	return (fd);
 }
 
-/* Load the information (col and row size, and chars for empty, path, full, start and end)
+/*
+** Load the information (col and row size, and chars for empty, path, full,
+** start and end)
 ** of the first line of the file in the info struct;
 ** verifies whether the input is properly formatted.
 */
@@ -55,9 +57,10 @@ void		load_input_descriptor(char *buff, t_maze_info **info)
 	(*info)->end = *(buff);
 }
 
-/* This functions verifies the row that is read for any formatting violations,
- * i.e. more than one entry, or no exits, too many or not enough chars, and
- * detects whether there are too many rows.
+/*
+** This functions verifies the row that is read for any formatting violations,
+** i.e. more than one entry, or no exits, too many or not enough chars, and
+** detects whether there are too many rows.
 */
 
 void		verify_row(char *str, t_maze_info *info)

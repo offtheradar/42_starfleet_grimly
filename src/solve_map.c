@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:54:09 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/13 14:02:40 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:06:03 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		is_empty(int y, int x, t_maze_info *info)
 	return (0);
 }
 
-void	visit_adj(t_maze_info **info, t_point *p, t_queue *q, char prv)
+void	vis_adj(t_maze_info **info, t_point *p, t_queue *q, char prv)
 {
 	(*info)->map[p->y][p->x] = prv;
 	enqueue(q, p);
@@ -60,14 +60,14 @@ void	solve_map(t_maze_info **info)
 	{
 		if (solution_found(*info, q->front))
 			return (backtrack_print(info, q->front->pt->x, q->front->pt->y, q));
-		if (is_empty(q->front->pt->y - 1, q->front->pt->x, *info)) 
-			visit_adj(info, init_pt(q->front->pt->x, q->front->pt->y - 1), q, U);
+		if (is_empty(q->front->pt->y - 1, q->front->pt->x, *info))
+			vis_adj(info, init_pt(q->front->pt->x, q->front->pt->y - 1), q, U);
 		if (is_empty(q->front->pt->y, q->front->pt->x - 1, *info))
-			visit_adj(info, init_pt(q->front->pt->x - 1, q->front->pt->y), q, L);
+			vis_adj(info, init_pt(q->front->pt->x - 1, q->front->pt->y), q, L);
 		if (is_empty(q->front->pt->y, q->front->pt->x + 1, *info))
-			visit_adj(info, init_pt(q->front->pt->x + 1, q->front->pt->y), q, R);
+			vis_adj(info, init_pt(q->front->pt->x + 1, q->front->pt->y), q, R);
 		if (is_empty(q->front->pt->y + 1, q->front->pt->x, *info))
-			visit_adj(info, init_pt(q->front->pt->x, q->front->pt->y + 1), q, D);
+			vis_adj(info, init_pt(q->front->pt->x, q->front->pt->y + 1), q, D);
 		dequeue(q);
 	}
 	free(q);
