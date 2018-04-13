@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:34:47 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 20:07:39 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:38:01 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void		print_maze(t_maze_info *info)
 
 	i = 0;
 	j = 0;
-	while (i < info->row_size)
+	while (i < info->num_row)
 	{
 		j = 0;
-		while (j < info->col_size)
+		while (j < info->num_col)
 		{
-			if (info->map[i][j] <= '9' && info->map[i][j] >= '6')
+			if (info->map[i][j] <= -1 && info->map[i][j] >= -4)
 				ft_putchar(info->empty);
 			else
 				ft_putchar(info->map[i][j]);
@@ -39,22 +39,22 @@ int			create_path(t_maze_info **info, int x, int y)
 {
 	static int counter;
 
-	if ((*info)->map[y][x] == '9')
+	if ((*info)->map[y][x] == U)
 	{
 		create_path(info, x, y + 1);
 		(*info)->map[y][x] = (*info)->path;
 	}
-	if ((*info)->map[y][x] == '8')
+	if ((*info)->map[y][x] == L)
 	{
 		create_path(info, x + 1, y);
 		(*info)->map[y][x] = (*info)->path;
 	}
-	if ((*info)->map[y][x] == '7')
+	if ((*info)->map[y][x] == R)
 	{
 		create_path(info, x - 1, y);
 		(*info)->map[y][x] = (*info)->path;
 	}
-	if ((*info)->map[y][x] == '6')
+	if ((*info)->map[y][x] == D)
 	{
 		create_path(info, x, y - 1);
 		(*info)->map[y][x] = (*info)->path;
@@ -63,7 +63,7 @@ int			create_path(t_maze_info **info, int x, int y)
 	return (counter);
 }
 
-void		backtrack_print(t_maze_info **info, int x, int y)
+void		backtrack_print(t_maze_info **info, int x, int y, t_queue *q)
 {
 	int counter;
 
@@ -72,4 +72,6 @@ void		backtrack_print(t_maze_info **info, int x, int y)
 	ft_putstr("RESULT IN ");
 	ft_putnbr(counter);
 	ft_putstr(" STEPS!\n");
+	free_queue(q);
+	free(q);
 }

@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:54:09 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 11:02:50 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:42:05 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int		is_valid_pt(int y, int x, t_maze_info *info)
 {
-	if (x >= 0 && y >= 0 && x < info->col_size && y < info->row_size)
+	if (x >= 0 && y >= 0 && x < info->num_col && y < info->num_row)
 		return (1);
 	return (0);
 }
 
 int		solution_found(t_maze_info *info, t_qnode *q)
 {
-	if ((is_valid_pt(q->point->y + 1, q->point->x, info) &&
-		info->map[q->point->y + 1][q->point->x] == info->end) ||
-		(is_valid_pt(q->point->y - 1, q->point->x, info) &&
-		info->map[q->point->y - 1][q->point->x] == info->end) ||
-		(is_valid_pt(q->point->y, q->point->x + 1, info) &&
-		info->map[q->point->y][q->point->x + 1] == info->end) ||
-		(is_valid_pt(q->point->y, q->point->x - 1, info) &&
-		info->map[q->point->y][q->point->x - 1] == info->end))
+	if ((is_valid_pt(q->pt->y + 1, q->pt->x, info) &&
+		info->map[q->pt->y + 1][q->pt->x] == info->end) ||
+		(is_valid_pt(q->pt->y - 1, q->pt->x, info) &&
+		info->map[q->pt->y - 1][q->pt->x] == info->end) ||
+		(is_valid_pt(q->pt->y, q->pt->x + 1, info) &&
+		info->map[q->pt->y][q->pt->x + 1] == info->end) ||
+		(is_valid_pt(q->pt->y, q->pt->x - 1, info) &&
+		info->map[q->pt->y][q->pt->x - 1] == info->end))
 		return (1);
 	return (0);
 }
@@ -40,41 +40,36 @@ int		is_empty(int y, int x, t_maze_info *info)
 	return (0);
 }
 
-void	visit_adj(t_maze_info **info, int x, int y, t_queue *q, char prv)
+void	visit_adj(t_maze_info **info, t_point *p, t_queue *q, char prv)
 {
-	t_point *p;
-
-	p = init_point(x, y);
-	(*info)->map[y][x] = prv;
+	(*info)->map[p->y][p->x] = prv;
 	enqueue(q, p);
 	free(p);
 }
 
 void	solve_map(t_maze_info **info)
 {
-	t_queue	q;
+	t_queue	*q;
 	t_point	*p;
 
-	p = init_point((*info)->start_point->x, (*info)->start_point->y);
-	q = *(create_queue());
-	enqueue(&q, p);
-	while (q.front)
+	p = init_pt((*info)->start_point->x, (*info)->start_point->y);
+	q = (create_queue());
+	enqueue(q, p);
+	free(p);
+	while (q->front)
 	{
-		if (solution_found(*info, q.front))
-		{
-			backtrack_print(info, q.front->point->x, q.front->point->y);
-			free_queue(&q);
-			return ;
-		}
-		if (is_empty(q.front->point->y - 1, q.front->point->x, *info))
-			visit_adj(info, q.front->point->x, q.front->point->y - 1, &q, '9');
-		if (is_empty(q.front->point->y, q.front->point->x - 1, *info))
-			visit_adj(info, q.front->point->x - 1, q.front->point->y, &q, '8');
-		if (is_empty(q.front->point->y, q.front->point->x + 1, *info))
-			visit_adj(info, q.front->point->x + 1, q.front->point->y, &q, '7');
-		if (is_empty(q.front->point->y + 1, q.front->point->x, *info))
-			visit_adj(info, q.front->point->x, q.front->point->y + 1, &q, '6');
-		dequeue(&q);
+		if (solution_found(*info, q->front))
+			return (backtrack_print(info, q->front->pt->x, q->front->pt->y, q));
+		if (is_empty(q->front->pt->y - 1, q->front->pt->x, *info)) 
+			visit_adj(info, init_pt(q->front->pt->x, q->front->pt->y - 1), q, U);
+		if (is_empty(q->front->pt->y, q->front->pt->x - 1, *info))
+			visit_adj(info, init_pt(q->front->pt->x - 1, q->front->pt->y), q, L);
+		if (is_empty(q->front->pt->y, q->front->pt->x + 1, *info))
+			visit_adj(info, init_pt(q->front->pt->x + 1, q->front->pt->y), q, R);
+		if (is_empty(q->front->pt->y + 1, q->front->pt->x, *info))
+			visit_adj(info, init_pt(q->front->pt->x, q->front->pt->y + 1), q, D);
+		dequeue(q);
 	}
+	free(q);
 	map_error();
 }

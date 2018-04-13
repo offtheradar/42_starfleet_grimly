@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:05:55 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 20:02:42 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:12:48 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_qnode	*new_node(t_point *pt)
 	t_qnode *tmp;
 
 	tmp = (t_qnode *)ft_memalloc(sizeof(t_qnode));
-	tmp->point = (t_point *)ft_memalloc(sizeof(t_point));
-	tmp->point->x = pt->x;
-	tmp->point->y = pt->y;
+	tmp->pt = (t_point *)ft_memalloc(sizeof(t_point));
+	tmp->pt->x = pt->x;
+	tmp->pt->y = pt->y;
 	tmp->next = NULL;
 	return (tmp);
 }
@@ -43,7 +43,7 @@ t_queue	*create_queue(void)
 }
 
 /*
-** Function to add a point to the queue
+** Function to add a pt to the queue
 */
 
 void	enqueue(t_queue *q, t_point *pt)
@@ -69,12 +69,13 @@ void	dequeue(t_queue *q)
 {
 	t_qnode *tmp;
 
-	if (!q->front || !q)
+	if (!q || !q->front)
 		return ;
 	tmp = q->front;
 	q->front = q->front->next;
 	if (!q->front)
 		q->rear = NULL;
+	free(tmp->pt);
 	free(tmp);
 }
 
@@ -82,7 +83,7 @@ void	free_queue(t_queue *q)
 {
 	if (q)
 	{
-		while ((*q).front)
+		while (q->front)
 			dequeue(q);
 	}
 }

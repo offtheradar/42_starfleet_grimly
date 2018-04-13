@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:56:35 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/11 19:34:31 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:50:26 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int			open_file(char *file_name)
 
 void		load_input_descriptor(char *buff, t_maze_info **maze)
 {
-	if (!((*maze)->row_size = ft_atoi(buff)) || (*maze)->row_size <= 0)
+	if (!((*maze)->num_row = ft_atoi(buff)) || (*maze)->num_row <= 0)
 		map_error();
 	while (ft_isdigit(*buff))
 		buff++;
 	if (*buff != 'x')
 		map_error();
 	buff++;
-	if (!((*maze)->col_size = ft_atoi(buff)) || (*maze)->col_size <= 0)
+	if (!((*maze)->num_col = ft_atoi(buff)) || (*maze)->num_col <= 0)
 		map_error();
 	while (ft_isdigit(*buff))
 		buff++;
@@ -74,31 +74,31 @@ int			verify_row(char *str, t_maze_info *info)
 		if (num_entries > 1)
 			map_error();
 	}
-	if (++rows > info->row_size)
+	if (++rows > info->num_row)
 		map_error();
 	return (num_exit);
 }
 
 t_maze_info	*load_file(int fd)
 {
-	t_maze_info *maze;
+	t_maze_info *info;
 	int			num_exit;
 	int			i;
 	char		*buff;
 
 	i = 0;
 	num_exit = 0;
-	init_maze_info(&maze);
+	init_maze_info(&info);
 	get_next_line(fd, &buff);
-	load_input_descriptor(buff, &maze);
+	load_input_descriptor(buff, &info);
 	free(buff);
-	malloc_map(&maze->map, maze->row_size, maze->col_size);
-	while (get_next_line(fd, &(maze->map[i])) > 0)
+	info->map = ft_memalloc(sizeof(char *) *info->num_row);
+	while (get_next_line(fd, &(info->map[i])) > 0)
 	{
-		num_exit = verify_row(maze->map[i], maze);
+		num_exit = verify_row(info->map[i], info);
 		i++;
 	}
 	if (!num_exit)
 		map_error();
-	return (maze);
+	return (info);
 }
