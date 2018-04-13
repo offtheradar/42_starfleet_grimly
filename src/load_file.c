@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:56:35 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:50:26 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:51:59 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ int			open_file(char *file_name)
 	return (fd);
 }
 
-void		load_input_descriptor(char *buff, t_maze_info **maze)
+void		load_input_descriptor(char *buff, t_maze_info **info)
 {
-	if (!((*maze)->num_row = ft_atoi(buff)) || (*maze)->num_row <= 0)
+	if (!((*info)->num_row = ft_atoi(buff)) || (*info)->num_row <= 0)
 		map_error();
 	while (ft_isdigit(*buff))
 		buff++;
 	if (*buff != 'x')
 		map_error();
 	buff++;
-	if (!((*maze)->num_col = ft_atoi(buff)) || (*maze)->num_col <= 0)
+	if (!((*info)->num_col = ft_atoi(buff)) || (*info)->num_col <= 0)
 		map_error();
 	while (ft_isdigit(*buff))
 		buff++;
 	if (ft_strlen(buff) != 5)
 		map_error();
-	(*maze)->full = *(buff)++;
-	(*maze)->empty = *(buff)++;
-	(*maze)->path = *(buff)++;
-	(*maze)->start = *(buff)++;
-	(*maze)->end = *(buff);
+	(*info)->full = *(buff)++;
+	(*info)->empty = *(buff)++;
+	(*info)->path = *(buff)++;
+	(*info)->start = *(buff)++;
+	(*info)->end = *(buff);
 }
 
 int			verify_row(char *str, t_maze_info *info)

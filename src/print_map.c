@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:34:47 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:38:01 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:55:32 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int			create_path(t_maze_info **info, int x, int y)
 		create_path(info, x, y - 1);
 		(*info)->map[y][x] = (*info)->path;
 	}
-	counter++;
-	return (counter);
+	return (counter++);
 }
 
 void		backtrack_print(t_maze_info **info, int x, int y, t_queue *q)
