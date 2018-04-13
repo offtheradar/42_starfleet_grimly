@@ -6,11 +6,15 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:31:03 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:49:18 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:57:12 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/grimly.h"
+
+/*
+** Initialize the variables in maze_info
+*/
 
 void		init_maze_info(t_maze_info **info)
 {
@@ -22,6 +26,10 @@ void		init_maze_info(t_maze_info **info)
 	(*info)->start = 0;
 	(*info)->path = 0;
 	(*info)->end = 0;
+	(*info)->row_counter = 0;
+	(*info)->entry_counter = 0;
+	(*info)->exit_counter = 0;
+	(*info)->error = 0;
 	(*info)->start_point = init_pt(0, 0);
 }
 
@@ -34,6 +42,10 @@ t_point		*init_pt(int x, int y)
 	p->y = y;
 	return (p);
 }
+
+/*
+** Free the memory allocated to a maze_info struct
+*/
 
 void		free_maze(t_maze_info *info)
 {

@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:54:09 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:52:28 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:02:40 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void	solve_map(t_maze_info **info)
 		dequeue(q);
 	}
 	free(q);
-	map_error();
+	(*info)->error = -2;
 }

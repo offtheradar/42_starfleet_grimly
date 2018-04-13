@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:55:04 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:46:31 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:18:48 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct	s_maze_info
 {
 	int		num_col;
 	int		num_row;
+	int		row_counter;
+	int		entry_counter;
+	int		exit_counter;
+	int		steps_counter;
+	int		error;
 	char	empty;
 	char	full;
 	char	start;
@@ -67,11 +72,11 @@ int				open_file(char *file_name);
 
 void			init_maze_info(t_maze_info **new_maze);
 
-void			map_error(void);
+int				map_error(void);
 
 void			load_input_descriptor(char *buff, t_maze_info **maze);
 
-int				verify_row(char *str, t_maze_info *info);
+void			verify_row(char *str, t_maze_info *info);
 
 t_maze_info		*load_file(int fd);
 

@@ -6,14 +6,14 @@
 #    By: ysibous <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/12 10:31:31 by ysibous           #+#    #+#              #
-#    Updated: 2018/04/12 11:05:39 by ysibous          ###   ########.fr        #
+#    Updated: 2018/04/13 13:39:57 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = grimly
 
-CC = gcc
+CC = clang -g
 CFLAGS = -Wall -Wextra -Werror -o
 
 FILES = main.c

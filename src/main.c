@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:30:24 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:48:27 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:02:27 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,14 @@ int	main(int argc, char **argv)
 	{
 		while (argv[i])
 		{
-			fd = open_file(argv[1]);
+			fd = open_file(argv[i]);
 			info = load_file(fd);
-			solve_map(&info);
+			if (info->error == -1)
+				ft_putstr_fd("MAP ERROR\n", 2);
+			else
+				solve_map(&info);
+			if (info->error == -2)
+				ft_putstr_fd("MAP ERROR\n", 2);
 			i++;
 		}
 	}

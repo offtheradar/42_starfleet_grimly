@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 12:56:35 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 17:51:59 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:38:33 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,26 @@ int			open_file(char *file_name)
 	return (fd);
 }
 
+/* Load the information (col and row size, and chars for empty, path, full, start and end)
+** of the first line of the file in the info struct;
+** verifies whether the input is properly formatted.
+*/
+
 void		load_input_descriptor(char *buff, t_maze_info **info)
 {
 	if (!((*info)->num_row = ft_atoi(buff)) || (*info)->num_row <= 0)
-		map_error();
+		(*info)->error = -1;
 	while (ft_isdigit(*buff))
 		buff++;
 	if (*buff != 'x')
-		map_error();
+		(*info)->error = -1;
 	buff++;
 	if (!((*info)->num_col = ft_atoi(buff)) || (*info)->num_col <= 0)
-		map_error();
+		(*info)->error = -1;
 	while (ft_isdigit(*buff))
 		buff++;
 	if (ft_strlen(buff) != 5)
-		map_error();
+		(*info)->error = -1;
 	(*info)->full = *(buff)++;
 	(*info)->empty = *(buff)++;
 	(*info)->path = *(buff)++;
@@ -50,33 +55,34 @@ void		load_input_descriptor(char *buff, t_maze_info **info)
 	(*info)->end = *(buff);
 }
 
-int			verify_row(char *str, t_maze_info *info)
+/* This functions verifies the row that is read for any formatting violations,
+ * i.e. more than one entry, or no exits, too many or not enough chars, and
+ * detects whether there are too many rows.
+*/
+
+void		verify_row(char *str, t_maze_info *info)
 {
-	int			i;
-	static int	num_entries;
-	static int	num_exit;
-	static int	rows;
+	int		i;
 
 	i = -1;
 	while (str[++i])
 	{
 		if (str[i] != info->empty && str[i] != info->start &&
 			str[i] != info->end && str[i] != info->path && str[i] != info->full)
-			map_error();
+			info->error = -1;
 		if (str[i] == info->start)
 		{
-			num_entries += 1;
+			info->entry_counter += 1;
 			info->start_point->x = i;
-			info->start_point->y = rows;
+			info->start_point->y = info->row_counter;
 		}
 		if (str[i] == info->end)
-			num_exit += 1;
-		if (num_entries > 1)
-			map_error();
+			info->exit_counter += 1;
+		if (info->entry_counter > 1)
+			info->error = -1;
 	}
-	if (++rows > info->num_row)
-		map_error();
-	return (num_exit);
+	if (++(info->row_counter) > info->num_row || info->num_col != i)
+		info->error = -1;
 }
 
 t_maze_info	*load_file(int fd)
@@ -92,13 +98,13 @@ t_maze_info	*load_file(int fd)
 	get_next_line(fd, &buff);
 	load_input_descriptor(buff, &info);
 	free(buff);
-	info->map = ft_memalloc(sizeof(char *) *info->num_row);
+	info->map = ft_memalloc(sizeof(char *) * info->num_row);
 	while (get_next_line(fd, &(info->map[i])) > 0)
 	{
-		num_exit = verify_row(info->map[i], info);
+		verify_row(info->map[i], info);
 		i++;
 	}
-	if (!num_exit)
-		map_error();
+	if (!(info->exit_counter) || (info->row_counter) != info->num_row)
+		(info)->error = -1;
 	return (info);
 }
