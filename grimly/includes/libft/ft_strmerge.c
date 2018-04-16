@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/28 18:48:05 by ysibous           #+#    #+#             */
-/*   Updated: 2018/03/16 14:45:20 by ysibous          ###   ########.fr       */
+/*   Created: 2018/04/15 19:05:26 by ysibous           #+#    #+#             */
+/*   Updated: 2018/04/15 19:05:28 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <fcntl.h>
-# include "libft.h"
-# define BUFF_SIZE 4096
-# define MAX_FD 4867
+#include "libft.h"
 
-int				get_next_line(const int fd, char **line);
+char	*ft_strmerge(char *a, char *b)
+{
+	char	*ret;
 
-#endif
+	ret = ft_strjoin(a, b);
+	ft_strdel(&a);
+	ft_strdel(&b);
+	return (ret);
+}

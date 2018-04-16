@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 10:30:24 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/13 14:14:27 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/15 19:14:40 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int	main(int argc, char **argv)
 	t_maze_info	*info;
 
 	fd = 0;
-	i = 1;
+	i = 0;
 	while (argv[i])
 	{
-		if (argc != 1)
+		if (argc > 1 && i == 0)
+			i++;
+		if (argc > 1)
 			fd = open_file(argv[i]);
 		info = load_file(fd);
 		if (info->error == -1)

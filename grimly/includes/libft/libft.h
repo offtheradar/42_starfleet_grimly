@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 21:16:42 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/12 10:36:14 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/15 19:06:16 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+char	*			ft_strmerge(char *a, char *b);
 
 void				ft_swapstr(char **x, char **y);
 
